@@ -5,14 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "open:cypress": "cypress open",
-    "run:tests": "cypress run"
+    "cypress:open": "cypress open",
+    "cypress:test": "cypress run"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bsfraga/cypress-wcaquino.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bsfraga/cypress-wcaquino/issues"
+  },
+  "homepage": "https://github.com/bsfraga/cypress-wcaquino#readme",
   "dependencies": {
-    "cypress": "^4.9.0",
+    "cypress": "^4.11.0",
     "cypress-xpath": "^1.6.0"
   }
 }

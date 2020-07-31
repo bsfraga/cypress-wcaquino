@@ -2,21 +2,18 @@
 
 import locator from '../support/locators'
 
-describe('Inserir Conta no Senhor Barriga WCAquino', () => {
-    before(() => {
+describe('Inserir Movimentação no Senhor Barriga WCAquino', () => {
+    before('Acessar site senhor Barriga', () => {
         cy.visit("http://barrigareact.wcaquino.me")
     })
 
     it('Acessar conta no Senhor Barriga WCAquino', () => {
-        cy.get(locator.LOGIN.EMAIL).type('usuarioteste@gmail.com')
-        cy.get(locator.LOGIN.SENHA).type('Ab102030')
-        cy.get(locator.LOGIN.BTN_ENTRAR).click()
-        cy.get(locator.MENSAGEM.TEXTO).should('contain', 'Bem vindo, Usuário de Teste!')
-        cy.closeToast()
+        cy.login('usuarioteste@gmail.com', 'Ab102030')
+        cy.validateToastAndClose('Bem vindo, Usuário de Teste!')
     })
 
     it('Acessar página de Movimentação no Senhor Barriga WcAquino', () => {
-        cy.get(locator.MENU_SUPERIOR.MOVIMENTACAO).click()
+        cy.get(locator.MENU.MOVIMENTACAO).click()
         cy.url().should('contain', '/movimentacao')
     })
 
@@ -35,7 +32,7 @@ describe('Inserir Conta no Senhor Barriga WCAquino', () => {
     })
 
     it('Acessar página de Movimentação no Senhor Barriga WcAquino', () => {
-        cy.get(locator.MENU_SUPERIOR.MOVIMENTACAO).click()
+        cy.get(locator.MENU.MOVIMENTACAO).click()
         cy.url().should('contain', '/movimentacao')
     })
 
@@ -46,6 +43,11 @@ describe('Inserir Conta no Senhor Barriga WCAquino', () => {
         cy.get(locator.MOVIMENTACAO.INTERESSADO).type('Testando Interessado da Movimentação')
         cy.get(locator.MOVIMENTACAO.STATUS).click()
         cy.get(locator.MOVIMENTACAO.BTN_SALVAR).click()
+    })
+
+    after('Efetuar logout', () => {
+        cy.logout()
+        cy.validateToastAndClose('Até Logo!')
     })
 
 })
