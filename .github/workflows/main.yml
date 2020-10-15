@@ -1,21 +1,18 @@
 name: Parallel Cypress Tests
 
-# on:
-#   schedule:
-#     # * is a special character in YAML so you have to quote this string
-#     - cron: '0 12 * * 2'
-
 on:
   push:
     branches: master
+  schedule:
+    - cron: '0 12 * * 2'
   
 
 jobs:
   cross-browser:
     runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node12.16.1-chrome80-ff73
-      options: --user 1001
+#     container:
+#       image: cypress/browsers:node12.16.1-chrome80-ff73
+#       options: --user 1001
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v1
@@ -26,12 +23,16 @@ jobs:
           start: yarn start
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 300
+          parallel: true
+          parallelism: 4 
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Recommended: pass the GitHub token lets this action correctly
           # determine the unique run id necessary to re-run the checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          
       - name: Chrome Browser Tests
         uses: cypress-io/github-action@v2
         with:
@@ -39,6 +40,8 @@ jobs:
           start: yarn start
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 300
+          parallel: true
+          parallelism: 4
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
