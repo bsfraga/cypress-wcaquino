@@ -30,13 +30,15 @@ const locators = {
     },
     EXTRATO: {
         XP_VALOR_TRANSACAO: '//small[contains(., "R$")]',
-        FN_XP_TRANSACAO: (text) => `//li[contains(., '${text}')]`
+        FN_XP_TRANSACAO: (text) => `//li[contains(., '${text}')]`,
+        FN_XP_REMOVER_TRANSACAO: (text) => `//span[contains(., '${text}')]/../../../div/i`,
+        FN_XP_EDITAR_TRANSACAO: (text) => `//li[contains(., '${text}')]//i[@class='fas fa-edit']`
     },
     CONTAS: {
         CONTA: '[data-test=nome]',
         BTN_SALVAR: '.btn',
         TABELA_CONTAS: '.table',
-        XP_TEST_ACC: '//td[contains(., "baeludo")]',
+        FN_XP_TEST_ACC: (accountName) => `//td[contains(., "${accountName}")]`,
         FN_BTN_EDITAR: (accountName) => `//td[contains(., '${accountName}')]/following-sibling::td/i[1]`,
         EXCLUIR: '.fa-trash-alt',
     },

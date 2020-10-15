@@ -1,8 +1,6 @@
 /// <reference types="cypress"/>
 
-import locator from '../support/locators'
-
-describe('Redefinir dados da Conta de Testes no Senhor Barriga WcAquino', () => {
+describe('Testes Funcionais: Redefinir dados da Conta de Testes', () => {
     before('Acessar site senhor Barriga', () => {
         cy.visit("http://barrigareact.wcaquino.me")
     })

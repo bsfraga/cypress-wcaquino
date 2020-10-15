@@ -1,8 +1,6 @@
 /// <reference types="cypress"/>
 
-import locator from '../support/locators'
-
-describe('Inserir Conta no Senhor Barriga WCAquino', () =>{
+describe('Testes Funcionais: Remover transação', () => {
     before('Acessar site senhor Barriga', () => {
         cy.visit("http://barrigareact.wcaquino.me")
     })
@@ -12,19 +10,17 @@ describe('Inserir Conta no Senhor Barriga WCAquino', () =>{
         cy.validateToastAndClose('Bem vindo, Usuário de Teste!')
     })
 
-    it('Acessar página de Contas do Senhor Barriga WCAquino', () => {
-        cy.accessAccountPage()
-        cy.url().should('contain', '/contas')
+    it('Acessar página de extrato no Senhor Barriga WCAquino', () => {
+        cy.accessBalancePage()
     })
 
-    it('Criar conta no Senhor Barriga WCAquina', () => {
-        cy.createAccount('conta do baeludo')
-        cy.get(locator.CONTAS.TABELA_CONTAS).should('contain', 'conta do baeludo')
+    it('Remover transação do extrato no Senhor Barriga WCAquino', () => {
+        cy.removeTransactionFromBalance('Teste Movimentação')
+        cy.validateToastAndClose('Movimentação removida com sucesso!')
     })
 
     after('Efetuar logout', () => {
         cy.logout()
         cy.validateToastAndClose('Até Logo!')
     })
-
 })

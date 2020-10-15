@@ -1,14 +1,13 @@
 /// <reference types="cypress"/>
 
-import locator from '../support/locators'
+describe('Testes Funcionais: Alterar Conta', () =>{
 
-describe('Alterar Conta no Senhor Barriga WCAquino', () =>{
+    const accountName = 'conta para alterar'
+    const newAccountName = 'conta alterada'
+
     before('Acessar site senhor Barriga', () => {
         cy.visit("http://barrigareact.wcaquino.me")
     })
-
-    const accountName = 'conta do baeludo'
-    const newAccountName = 'conta do baeludo alterada'
 
     it('Acessar conta no Senhor Barriga WCAquino', ()=> {
         cy.login('usuarioteste@gmail.com', 'Ab102030')
@@ -17,7 +16,10 @@ describe('Alterar Conta no Senhor Barriga WCAquino', () =>{
     
     it('Acessar página de Contas no Senhor Barriga WcAquino', () => {
         cy.accessAccountPage()
-        cy.get(locator.CONTAS.TABELA_CONTAS).should('contain', accountName)
+    })
+
+    it('Criar conta no Senhor Barriga WCAquina', () => {
+        cy.createAccount('conta para alterar')
     })
 
     it('Alterar conta no Senhor Barriga WcAquino', () => {

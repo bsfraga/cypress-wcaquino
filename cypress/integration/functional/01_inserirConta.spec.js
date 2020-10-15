@@ -1,8 +1,6 @@
 /// <reference types="cypress"/>
 
-import locator from '../support/locators'
-
-describe('Inserir Conta Repetida no Senhor Barriga WCAquino', () => {
+describe('Testes Funcionais: Inserir Conta', () => {
     before('Acessar site senhor Barriga', () => {
         cy.visit("http://barrigareact.wcaquino.me")
     })
@@ -14,15 +12,10 @@ describe('Inserir Conta Repetida no Senhor Barriga WCAquino', () => {
 
     it('Acessar página de Contas do Senhor Barriga WCAquino', () => {
         cy.accessAccountPage()
-        cy.url().should('contain', '/contas')
     })
 
-    it('Adicionar conta já existe no Senhor Barriga WcAquino', () => {
-        cy.xpath(locator.CONTAS.XP_TEST_ACC).then(content => {
-            cy.get(locator.CONTAS.CONTA).type(content.text())
-            cy.get(locator.CONTAS.BTN_SALVAR).click()
-        })
-        cy.validateToastAndClose('Erro')
+    it('Criar conta no Senhor Barriga WCAquina', () => {
+        cy.createAccount('conta do baeludo')
     })
 
     after('Efetuar logout', () => {
