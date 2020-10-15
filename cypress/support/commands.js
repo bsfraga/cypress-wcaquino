@@ -137,7 +137,7 @@ Cypress.Commands.add('addNegativeIncome', (incomeLabel, interestedLabel, account
 
 /**
  * 
- * Commands related to integration testes
+ * Commands related to integration tests
  * 
  */
 
