@@ -1,0 +1,25 @@
+{
+  "name": "cypress-wcaquino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bsfraga/cypress-wcaquino.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bsfraga/cypress-wcaquino/issues"
+  },
+  "homepage": "https://github.com/bsfraga/cypress-wcaquino#readme",
+  "dependencies": {
+    "cypress": "^5.4.0",
+    "cypress-xpath": "^1.6.0"
+  }
+}
