@@ -17,14 +17,14 @@ describe('Testes de Integração: Alterar Conta', () => {
             method: 'GET',
             url: '/contas',
             qs: {
-                nome: 'Conta para alterar'
+                nome : "Conta para alterar"
             }
         }).then(response => {
             cy.request({
                 method: 'PUT',
                 url: `/contas/${response.body[0].id}`,
                 body: {
-                    nome: 'conta alterada via cypress'
+                    nome: 'conta alterada via service cypress'
                 }
             }).as('response')
         })
