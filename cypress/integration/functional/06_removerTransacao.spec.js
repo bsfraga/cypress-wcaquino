@@ -15,7 +15,7 @@ describe('Testes Funcionais: Remover transação', () => {
     })
 
     it('Remover transação do extrato no Senhor Barriga WCAquino', () => {
-        cy.removeTransactionFromBalance('Teste Movimentação')
+        cy.removeTransactionFromBalance('Movimentacao para exclusao')
         cy.validateToastAndClose('Movimentação removida com sucesso!')
     })
 
