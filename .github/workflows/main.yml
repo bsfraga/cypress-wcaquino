@@ -26,11 +26,8 @@ jobs:
         uses: ./
         with:
           working-directory: examples/chrome
-      - uses: actions/upload-artifact@v1
-        with:
-          name: screenshots-in-electron
-          path: examples/chrome/cypress/screenshots
-
+          wait-on: 'http://localhost:8000'
+          wait-on-timeout: 300
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
