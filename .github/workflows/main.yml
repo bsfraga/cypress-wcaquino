@@ -5,7 +5,6 @@ on:
     branches: master
   schedule:
     - cron: '0 12 * * 2'
-  
 
 jobs:
   cross-browser:
@@ -22,10 +21,12 @@ jobs:
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v1
+        
+        
       - name: Electron
-        uses: ./
+        uses: cypress-io/github-action@v2
         with:
-          working-directory: examples/chrome
+          browser: electron
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 300
         env:
