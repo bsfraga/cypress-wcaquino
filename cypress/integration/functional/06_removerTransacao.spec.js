@@ -1,5 +1,8 @@
 /// <reference types="cypress"/>
 
+
+
+
 describe('Testes Funcionais: Remover transação', () => {
     before('Acessar site senhor Barriga', () => {
         cy.visit("http://barrigareact.wcaquino.me")
