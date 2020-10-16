@@ -1,2 +1,1 @@
-# cypress-wcaquino [![cypress-wcaquino](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/sxd5hy/master&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/sxd5hy/runs)
-
+# cypress-wcaquino ![Parallel Cypress Tests](https://github.com/bsfraga/cypress-wcaquino/workflows/Parallel%20Cypress%20Tests/badge.svg)
