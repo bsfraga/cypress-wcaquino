@@ -1,6 +1,10 @@
 name: Parallel Cypress Tests
 
-on: [push]
+on:
+  schedule:
+    - cron: '15 9 * * *'
+  push:
+    branches: master
 
 jobs:
   test:
