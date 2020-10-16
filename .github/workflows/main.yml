@@ -1,52 +1,75 @@
-name: Parallel Cypress Tests
-
-on:
-  push:
-    branches: master
-  schedule:
-    - cron: '0 12 * * 2'
-
+name: example-chrome
+on: [push]
 jobs:
-  cross-browser:
+  tests:
     runs-on: ubuntu-latest
-#     container:
-#       image: cypress/browsers:node12.16.1-chrome80-ff73
-#       options: --user 1001
-    strategy:
-      matrix:
-      # the actual items in the array do not matter,
-      # just the number - to force CI to sping 3 copies
-      # of the current job in parallel
-        machines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     steps:
-      - name: Checkout Commit
+      - name: Checkout
         uses: actions/checkout@v1
-        
-        
+
+      - name: Cypress info
+        uses: ./
+        with:
+          # just for full picture after installing Cypress
+          # print information about detected browsers, etc
+          # see https://on.cypress.io/command-line#cypress-info
+          build: npx cypress info
+          working-directory: examples/chrome
+
       - name: Electron
-        uses: cypress-io/github-action@v2
+        uses: ./
         with:
-          browser: electron
-          wait-on: 'http://localhost:8000'
-          wait-on-timeout: 300
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-          
-      - name: Chrome Browser Tests
-        uses: cypress-io/github-action@v2
+          working-directory: examples/chrome
+
+      # store screenshot captured during the test
+      - uses: actions/upload-artifact@v1
         with:
+          name: screenshots-in-electron
+          path: examples/chrome/cypress/screenshots
+
+      - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/chrome
+
+      - name: Chrome
+        uses: ./
+        with:
+          working-directory: examples/chrome
           browser: chrome
-#           start: yarn start
-          wait-on: 'http://localhost:8000'
-          wait-on-timeout: 300
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: screenshots-in-chrome
+          path: examples/chrome/cypress/screenshots
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: video-in-chrome
+          path: examples/chrome/cypress/videos
+
+      - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/chrome
+
+      # I wonder if GH Actions VM includes any of the tools that
+      # can tell us the resolution of a video file
+      - run: ffprobe cypress/videos/*.mp4 || true
+      - run: mplayer -really-quiet -ao null -vo null -identify -frames 0 cypress/videos/*.mp4 || true
+
+      - name: Chrome headless
+        uses: ./
+        with:
+          working-directory: examples/chrome
+          browser: chrome
+          headless: true
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: screenshots-in-headless-chrome
+          path: examples/chrome/cypress/screenshots
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: video-in-headless-chrome
+          path: examples/chrome/cypress/videos
+
+      - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/chrome
