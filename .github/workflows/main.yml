@@ -42,7 +42,7 @@ jobs:
           npx marge cypress/report/mochawesome-report/output.json --reportDit ./ --inline
           
       - name: Archive artifacts
-        uses: action/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: Mochawesome Report
           path: cypress/report/mochawesome-report/
