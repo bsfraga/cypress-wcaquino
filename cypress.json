@@ -1,4 +1,12 @@
 {
   "projectId": "sxd5hy",
-  "baseUrl": "https://barrigarest.wcaquino.me"
+  "baseUrl": "https://barrigarest.wcaquino.me",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "charts": true,
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "reportDir": "cypress/report/mochawesome-report"
+   }
 }
