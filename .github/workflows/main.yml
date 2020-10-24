@@ -32,3 +32,19 @@ jobs:
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: Merge report results
+        run: |
+          npx mochawesome-merge cypress/report/mochawesome-report/*json > cypress/report/mochawesome-report/output.json
+          
+      - name: Convert .json report file into .html
+        run: |
+          npx marge cypress/report/mochawesome-report/output.json --reportDit ./ --inline
+          
+      - name: Archive artifacts
+        uses: action/upload-artifact@v2
+        with:
+          name: Mochawesome Report
+          path: cypress/report/mochawesome-report/
+          
+      
